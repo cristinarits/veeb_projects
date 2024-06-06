@@ -1,0 +1,74 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\crystal\\source\\repos\\veeb\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{54C07D1C-2CC7-4C52-8235-19D58B4FC510}|veeb.csproj|c:\\users\\crystal\\source\\repos\\veeb\\controllers\\nordpoolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54C07D1C-2CC7-4C52-8235-19D58B4FC510}|veeb.csproj|solutionrelative:controllers\\nordpoolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54C07D1C-2CC7-4C52-8235-19D58B4FC510}|veeb.csproj|c:\\users\\crystal\\source\\repos\\veeb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54C07D1C-2CC7-4C52-8235-19D58B4FC510}|veeb.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54C07D1C-2CC7-4C52-8235-19D58B4FC510}|veeb.csproj|c:\\users\\crystal\\source\\repos\\veeb\\controllers\\parcelmachinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54C07D1C-2CC7-4C52-8235-19D58B4FC510}|veeb.csproj|solutionrelative:controllers\\parcelmachinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NordpoolController.cs",
+              "DocumentMoniker": "C:\\Users\\crystal\\source\\repos\\veeb\\Controllers\\NordpoolController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NordpoolController.cs",
+              "ToolTip": "C:\\Users\\crystal\\source\\repos\\veeb\\Controllers\\NordpoolController.cs",
+              "RelativeToolTip": "Controllers\\NordpoolController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T18:37:02.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ParcelMachineController.cs",
+              "DocumentMoniker": "C:\\Users\\crystal\\source\\repos\\veeb\\Controllers\\ParcelMachineController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ParcelMachineController.cs",
+              "ToolTip": "C:\\Users\\crystal\\source\\repos\\veeb\\Controllers\\ParcelMachineController.cs",
+              "RelativeToolTip": "Controllers\\ParcelMachineController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T15:10:24.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\crystal\\source\\repos\\veeb\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\crystal\\source\\repos\\veeb\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T22:11:36.025Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
