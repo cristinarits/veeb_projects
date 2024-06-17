@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\crystal\\source\\repos\\veeb\\veeb.csproj": {}
+    "C:\\Users\\crystal\\veeb_projects\\kodutoo_veeb\\backend\\veeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\crystal\\source\\repos\\veeb\\veeb.csproj": {
+    "C:\\Users\\crystal\\veeb_projects\\kodutoo_veeb\\backend\\veeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\crystal\\source\\repos\\veeb\\veeb.csproj",
+        "projectUniqueName": "C:\\Users\\crystal\\veeb_projects\\kodutoo_veeb\\backend\\veeb.csproj",
         "projectName": "veeb",
-        "projectPath": "C:\\Users\\crystal\\source\\repos\\veeb\\veeb.csproj",
+        "projectPath": "C:\\Users\\crystal\\veeb_projects\\kodutoo_veeb\\backend\\veeb.csproj",
         "packagesPath": "C:\\Users\\crystal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\crystal\\source\\repos\\veeb\\obj\\",
+        "outputPath": "C:\\Users\\crystal\\veeb_projects\\kodutoo_veeb\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\crystal\\AppData\\Roaming\\NuGet\\NuGet.Config",
