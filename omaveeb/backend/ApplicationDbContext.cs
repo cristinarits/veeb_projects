@@ -1,4 +1,4 @@
-﻿using backend.Models;
+﻿using orm.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace orm.Data

@@ -5,7 +5,7 @@ function App() {
   const [testiHinded, setTestiHinded] = useState([]);
   const [laadimine, setLaadimine] = useState(true);
   const [viga, setViga] = useState(null);
-  const [uusHinne, setUusHinne] = useState({ saadudPunktid: '', maksPunktid: '' });
+  const [uusHinne, setUusHinne] = useState({ saadudPunktid: '', maksPunktid: '', comment: '' });
 
   useEffect(() => {
     tooTestiHinded();
@@ -34,7 +34,6 @@ function App() {
       if (!response.ok) {
         throw new Error('Testihinde kustutamine ebaõnnestus');
       }
-      // Filtreerib välja kustutatud testi hinne
       setTestiHinded(testiHinded.filter(hinne => hinne.id !== id));
     } catch (error) {
       setViga(error);
@@ -51,7 +50,8 @@ function App() {
         },
         body: JSON.stringify({
           saadudPunktid: uusHinne.saadudPunktid,
-          maksPunktid: uusHinne.maksPunktid
+          maksPunktid: uusHinne.maksPunktid,
+          comment: uusHinne.comment
         })
       });
       if (!response.ok) {
@@ -59,7 +59,7 @@ function App() {
       }
       const newScore = await response.json();
       setTestiHinded([...testiHinded, newScore]);
-      setUusHinne({ saadudPunktid: '', maksPunktid: '' });
+      setUusHinne({ saadudPunktid: '', maksPunktid: '', comment: '' });
     } catch (error) {
       setViga(error);
     }
@@ -82,7 +82,8 @@ function App() {
       <ul>
         {testiHinded.map(hinne => (
           <li key={hinne.id}>
-            {hinne.saadudPunktid}/{hinne.maksPunktid} - {hinne.protsent}% : {hinne.hinne}
+            {hinne.saadudPunktid}/{hinne.maksPunktid} - {hinne.protsent}% : {hinne.hinne} <br />
+            Kommentaar: {hinne.comment}
             <button onClick={() => kustutaTestiHinne(hinne.id)}>x</button>
           </li>
         ))}
@@ -109,6 +110,17 @@ function App() {
               value={uusHinne.maksPunktid}
               onChange={handleChange}
               required
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Kommentaar:
+            <input
+              type="text"
+              name="comment"
+              value={uusHinne.comment}
+              onChange={handleChange}
             />
           </label>
         </div>
