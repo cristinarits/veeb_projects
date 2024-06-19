@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace orm.Models
@@ -6,6 +7,9 @@ namespace orm.Models
     public class TestScore : IValidatableObject
     {
         public int Id { get; set; }
+
+        [Required]
+        public string Subject { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "Saadud punktid peavad olema mitte-negatiivsed.")]
         public int SaadudPunktid { get; set; }
@@ -33,6 +37,9 @@ namespace orm.Models
         }
 
         public string Comment { get; set; }
+
+        [Required]
+        public DateTime Date { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

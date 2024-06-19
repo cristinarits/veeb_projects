@@ -2,7 +2,7 @@ body {
   font-family: 'Comic Neue Bold', cursive, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffe6f0;
+  background-color: #f3e5f5;
 }
 
 .App {
@@ -12,12 +12,12 @@ body {
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
-  border: 2px solid #ff80bf;
+  border: 2px solid #8e24aa;
 }
 
 h1 {
   text-align: center;
-  color: #cc00cc;
+  color: #6a1b9a;
   font-size: 2.5em;
 }
 
@@ -32,8 +32,8 @@ li {
   align-items: center;
   padding: 10px;
   margin: 10px 0;
-  background-color: #fce4ec;
-  border: 2px solid #ff80bf;
+  background-color: #f8bbd0;
+  border: 2px solid #8e24aa;
   border-radius: 8px;
   transition: transform 0.2s ease;
 }
@@ -43,7 +43,7 @@ li:hover {
 }
 
 button {
-  background-color: #ff66b2;
+  background-color: #d81b60;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -53,7 +53,7 @@ button {
 }
 
 button:hover {
-  background-color: #ff4da6;
+  background-color: #ad1457;
 }
 
 form {
@@ -69,18 +69,18 @@ form div {
 label {
   margin-bottom: 5px;
   font-weight: bold;
-  color: #cc00cc;
+  color: #6a1b9a;
 }
 
 input {
   padding: 10px;
-  border: 2px solid #ff80bf;
+  border: 2px solid #8e24aa;
   border-radius: 8px;
   font-size: 1em;
 }
 
 form button {
-  background-color: #cc00cc;
+  background-color: #6a1b9a;
   color: white;
   padding: 12px;
   border: none;
@@ -91,5 +91,20 @@ form button {
 }
 
 form button:hover {
-  background-color: #990099;
+  background-color: #4a0072;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filter input {
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 2px solid #8e24aa;
+  border-radius: 8px;
+  font-size: 1em;
 }

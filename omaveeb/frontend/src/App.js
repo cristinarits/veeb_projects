@@ -3,30 +3,36 @@ import './App.css';
 
 function App() {
   const [testiHinded, setTestiHinded] = useState([]);
-  const [laadimine, setLaadimine] = useState(true);
-  const [viga, setViga] = useState(null);
-  const [uusHinne, setUusHinne] = useState({ saadudPunktid: '', maksPunktid: '', comment: '' });
+  const [filteredTestiHinded, setFilteredTestiHinded] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [newTestScore, setNewTestScore] = useState({ saadudPunktid: '', maksPunktid: '', comment: '', subject: '', date: '' });
+  const [filter, setFilter] = useState({ subject: '', date: '' });
 
   useEffect(() => {
-    tooTestiHinded();
+    fetchTestiHinded();
   }, []);
 
-  const tooTestiHinded = async () => {
+  useEffect(() => {
+    applyFilter();
+  }, [testiHinded, filter]);
+
+  const fetchTestiHinded = async () => {
     try {
       const response = await fetch('https://localhost:7257/TestScores');
       if (!response.ok) {
-        throw new Error('Võrguvastus ei olnud korras');
+        throw new Error('Võrgu vastus ei olnud korras');
       }
       const data = await response.json();
       setTestiHinded(data);
-      setLaadimine(false);
+      setLoading(false);
     } catch (error) {
-      setViga(error);
-      setLaadimine(false);
+      setError(error);
+      setLoading(false);
     }
   };
 
-  const kustutaTestiHinne = async (id) => {
+  const deleteTestScore = async (id) => {
     try {
       const response = await fetch(`https://localhost:7257/TestScores/${id}`, {
         method: 'DELETE',
@@ -36,11 +42,11 @@ function App() {
       }
       setTestiHinded(testiHinded.filter(hinne => hinne.id !== id));
     } catch (error) {
-      setViga(error);
+      setError(error);
     }
   };
 
-  const lisaTestiHinne = async (e) => {
+  const addTestScore = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch('https://localhost:7257/TestScores', {
@@ -48,54 +54,105 @@ function App() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          saadudPunktid: uusHinne.saadudPunktid,
-          maksPunktid: uusHinne.maksPunktid,
-          comment: uusHinne.comment
-        })
+        body: JSON.stringify(newTestScore)
       });
       if (!response.ok) {
         throw new Error('Testihinde lisamine ebaõnnestus');
       }
-      const newScore = await response.json();
-      setTestiHinded([...testiHinded, newScore]);
-      setUusHinne({ saadudPunktid: '', maksPunktid: '', comment: '' });
+      const addedScore = await response.json();
+      setTestiHinded([...testiHinded, addedScore]);
+      setNewTestScore({ saadudPunktid: '', maksPunktid: '', comment: '', subject: '', date: '' });
     } catch (error) {
-      setViga(error);
+      setError(error);
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUusHinne(prevState => ({
+    setNewTestScore(prevState => ({
       ...prevState,
       [name]: value
     }));
   };
 
-  if (laadimine) return <p>Laadimine...</p>;
-  if (viga) return <p>Viga: {viga.message}</p>;
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilter(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const applyFilter = () => {
+    let filtered = testiHinded;
+    if (filter.subject) {
+      filtered = filtered.filter(hinne => hinne.subject.toLowerCase().includes(filter.subject.toLowerCase()));
+    }
+    if (filter.date) {
+      filtered = filtered.filter(hinne => hinne.date.includes(filter.date));
+    }
+    setFilteredTestiHinded(filtered);
+  };
+
+  if (loading) return <p>Laadimine...</p>;
+  if (error) return <p>Viga: {error.message}</p>;
 
   return (
     <div className="App">
-      <h1>TULEMUSED</h1>
+      <h1>Testi Hinded</h1>
+
+      <div className="filter">
+        <input
+          type="text"
+          placeholder="Filtreeri aine järgi"
+          name="subject"
+          value={filter.subject}
+          onChange={handleFilterChange}
+        />
+        <input
+          type="date"
+          placeholder="Filtreeri kuupäeva järgi"
+          name="date"
+          value={filter.date}
+          onChange={handleFilterChange}
+        />
+      </div>
+
       <ul>
-        {testiHinded.map(hinne => (
+        {filteredTestiHinded.map(hinne => (
           <li key={hinne.id}>
-            {hinne.saadudPunktid}/{hinne.maksPunktid} - {hinne.protsent}% : {hinne.hinne} <br />
-            Kommentaar: {hinne.comment}
-            <button onClick={() => kustutaTestiHinne(hinne.id)}>x</button>
+            <div>
+              <strong>Aine:</strong> {hinne.subject}<br />
+              <strong>Punktid:</strong> {hinne.saadudPunktid}/{hinne.maksPunktid} - {hinne.protsent}%<br />
+              <strong>Hinne:</strong> {hinne.hinne}<br />
+              <strong>Kommentaar:</strong> {hinne.comment}<br />
+              <strong>Kuupäev:</strong> {hinne.date}
+            </div>
+            <button onClick={() => deleteTestScore(hinne.id)}>Kustuta</button>
           </li>
         ))}
       </ul>
-      <form onSubmit={lisaTestiHinne}>
+
+      <form onSubmit={addTestScore}>
+        <div>
+          <label>
+            Aine:
+            <input
+              type="text"
+              name="subject"
+              value={newTestScore.subject}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
         <div>
           <label>
             Saadud Punktid:
             <input
               type="number"
               name="saadudPunktid"
-              value={uusHinne.saadudPunktid}
+              value={newTestScore.saadudPunktid}
               onChange={handleChange}
               required
             />
@@ -107,7 +164,7 @@ function App() {
             <input
               type="number"
               name="maksPunktid"
-              value={uusHinne.maksPunktid}
+              value={newTestScore.maksPunktid}
               onChange={handleChange}
               required
             />
@@ -119,12 +176,24 @@ function App() {
             <input
               type="text"
               name="comment"
-              value={uusHinne.comment}
+              value={newTestScore.comment}
               onChange={handleChange}
             />
           </label>
         </div>
-        <button type="submit">Arvuta hinne</button>
+        <div>
+          <label>
+            Kuupäev:
+            <input
+              type="date"
+              name="date"
+              value={newTestScore.date}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+        <button type="submit">Lisa Testi Hinne</button>
       </form>
     </div>
   );

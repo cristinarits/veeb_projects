@@ -21,38 +21,32 @@ namespace orm.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TestScore>>> GetTestScores()
+        public async Task<ActionResult<IEnumerable<TestScore>>> GetTestScores(
+            [FromQuery] string subject = null,
+            [FromQuery] DateTime? date = null)
         {
-            return await _context.TestScores.ToListAsync();
-        }
+            var query = _context.TestScores.AsQueryable();
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TestScore>> GetTestScore(int id)
-        {
-            var testScore = await _context.TestScores.FindAsync(id);
-
-            if (testScore == null)
+            if (!string.IsNullOrEmpty(subject))
             {
-                return NotFound("Puudub");
+                query = query.Where(t => t.Subject.Contains(subject));
             }
 
-            return testScore;
+            if (date.HasValue)
+            {
+                query = query.Where(t => t.Date.Date == date.Value.Date);
+            }
+
+            return await query.ToListAsync();
         }
 
         [HttpPost]
         public async Task<ActionResult<TestScore>> PostTestScore(TestScore testScore)
         {
-            var context = new ValidationContext(testScore, null, null);
-            var results = new List<ValidationResult>();
-            if (!Validator.TryValidateObject(testScore, context, results, true))
-            {
-                return BadRequest(results);
-            }
-
             _context.TestScores.Add(testScore);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetTestScore), new { id = testScore.Id }, testScore);
+            return CreatedAtAction(nameof(GetTestScores), new { id = testScore.Id }, testScore);
         }
 
         [HttpPut("{id}")]
@@ -60,14 +54,7 @@ namespace orm.Controllers
         {
             if (id != testScore.Id)
             {
-                return BadRequest("ID mismatch");
-            }
-
-            var context = new ValidationContext(testScore, null, null);
-            var results = new List<ValidationResult>();
-            if (!Validator.TryValidateObject(testScore, context, results, true))
-            {
-                return BadRequest(results);
+                return BadRequest();
             }
 
             _context.Entry(testScore).State = EntityState.Modified;
@@ -80,7 +67,7 @@ namespace orm.Controllers
             {
                 if (!TestScoreExists(id))
                 {
-                    return NotFound("Puudub");
+                    return NotFound();
                 }
                 else
                 {
@@ -97,7 +84,7 @@ namespace orm.Controllers
             var testScore = await _context.TestScores.FindAsync(id);
             if (testScore == null)
             {
-                return NotFound("Puudub");
+                return NotFound();
             }
 
             _context.TestScores.Remove(testScore);
